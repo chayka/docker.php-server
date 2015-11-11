@@ -5,11 +5,6 @@
 FROM ubuntu
 
 ################################################################################
-# Volumes
-################################################################################
-
-VOLUME ["/var/www", "/etc/nginx/sites-available", "/etc/nginx/sites-enabled"]
-################################################################################
 # Build instructions
 ################################################################################
 # Install packages
@@ -43,7 +38,7 @@ RUN sed -i "s/user = www-data/user = root/" /etc/php5/fpm/pool.d/www.conf && \
 # Add configuration files
 # COPY etc/nginx/sphp-site.conf /etc/nginx/conf.d/
 COPY etc/supervisor/supervisord.conf /etc/supervisor/conf.d/
-COPY etc/nginx/sites/* /etc/nginx/chayka/
+COPY etc/nginx/chayka/* /etc/nginx/chayka/
 COPY scripts/chayka /usr/local/bin/
 
 # Add executable rights to scripts and tweak nginx.conf
@@ -93,21 +88,17 @@ RUN chmod u+x /usr/local/bin/chayka* && \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# RUN curl -sS https://getcomposer.org/installer | php5 && \
-#   mv composer.phar /usr/local/bin/composer
-
-################################################################################
-# PhpUnit
-################################################################################
-
-# RUN wget https://phar.phpunit.de/phpunit.phar && \
-#   mv phpunit.phar /usr/local/bin/phpunit
-
 ################################################################################
 # Ports
 ################################################################################
 
 EXPOSE 80 443
+
+################################################################################
+# Volumes
+################################################################################
+
+VOLUME ["/var/www", "/etc/nginx/sites-available", "/etc/nginx/sites-enabled"]
 
 ################################################################################
 # Entrypoint
