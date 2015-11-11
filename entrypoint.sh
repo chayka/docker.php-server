@@ -5,7 +5,7 @@ set -e
 export TERM=xterm
 
 # a tweak to get mysql root password from mariadb
-export MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD-$MYSQL_ENV_MYSQL_ROOT_PASSWORD}
+export MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-$MYSQL_ENV_MYSQL_ROOT_PASSWORD}
 
 # install phpmyadmin if not installed
 
