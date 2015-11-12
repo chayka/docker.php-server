@@ -434,8 +434,9 @@ command_add_site() {
 		exit 0
 	fi
 	# create directory if needed
-	if [ ! -d "$HTDOCS_DIR/$domain	" ]; then
+	if [ ! -d "$HTDOCS_DIR/$domain" ]; then
 		mkdir $HTDOCS_DIR/$domain
+		mkdir $HTDOCS_DIR/$domain/logs
 		mkdir $HTDOCS_DIR/$domain/backup
 		mkdir $HTDOCS_DIR/$domain/certs
 		mkdir $HTDOCS_DIR/$domain/htdocs
